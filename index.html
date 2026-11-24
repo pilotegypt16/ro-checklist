@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RO Checklist</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="RO Checklist">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b4f8a">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,Helvetica,Arial,sans-serif;background:#f2f4f7;color:#111;padding-bottom:90px}
+header{background:#0b4f8a;color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;position:sticky;top:0;z-index:5;font-weight:600;font-size:18px}
+nav{display:flex;background:#fff;border-bottom:1px solid #ccd}
+nav button{flex:1;padding:12px;border:0;background:none;font-size:15px;color:#0b4f8a}
+nav button.on{border-bottom:3px solid #0b4f8a;font-weight:700}
+main{padding:12px;max-width:640px;margin:auto}
+.row{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:10px}
+label{display:block;font-size:14px;color:#333;margin-bottom:6px;font-weight:600}
+input,select,textarea{width:100%;font-size:17px;padding:10px;border:1px solid #bbc;border-radius:8px;background:#fff;color:#111;font-family:inherit}
+select.done{background:#d9f2dd}select.bad{background:#fadcdc}
+.note{font-size:13px;color:#a33;margin:6px 0 4px}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ccd;padding:10px 12px calc(env(safe-area-inset-bottom) + 10px);display:flex;gap:8px}
+button.b{flex:1;padding:13px;font-size:16px;border:0;border-radius:10px;background:#0b4f8a;color:#fff;font-weight:600}
+button.g{background:#e3e7ee;color:#222}
+button.r{background:#c0392b}
+.item{display:flex;gap:8px;align-items:center;background:#fff;border-radius:10px;padding:10px;margin-bottom:8px}
+.item .t{flex:1;font-size:15px}.item small{color:#666;display:block}
+.item button{padding:9px 11px;font-size:14px;border:0;border-radius:8px;background:#0b4f8a;color:#fff}
+.item button.r{background:#c0392b}
+.empty{text-align:center;color:#666;padding:30px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;background:#222;color:#fff;padding:10px 16px;border-radius:20px;display:none;z-index:9;font-size:14px}
+</style></head><body>
+<header>RO Site Checklist</header>
+<nav><button id="t1" class="on">New checklist</button><button id="t2">Saved checklists (<span id="cnt">0</span>)</button></nav>
+<main><div id="form"></div><div id="list" style="display:none"></div></main>
+<div class="bar" id="bar"><button class="b g" id="clr">Clear</button><button class="b" id="save">Save + PDF</button></div>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body></html>
