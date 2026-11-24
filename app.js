@@ -1,14 +1,14 @@
 (function(){
-var DN=["Done","Not Done"];
+var DN=["Done","Not Done","No Need"];
 var F=[
 {k:"site",l:"Site ID",t:"text"},
-{k:"action",l:"Action",t:"sel",o:["RO","L2600","MM","Feeder to fiber","Add sector","Etc"]},
-{k:"contractor",l:"Contractor",t:"sel",o:["Lm+","Merc","New Era","Phenomena","Alkan","OR","HOI","Integra","Platinum","Stepway","Signtel","Ericsson"]},
+{k:"action",l:"Action",t:"sel",o:["RO","L2600","MM","Feeder to fiber","Add sector","Etc","No Need"]},
+{k:"contractor",l:"Contractor",t:"sel",o:["Lm+","Merc","New Era","Phenomena","Alkan","OR","HOI","Integra","Platinum","Stepway","Signtel","Ericsson","No Need"]},
 {k:"dvisit",l:"Date of visit",t:"date"},
 {k:"dclear",l:"Date of clearance",t:"date"},
 {k:"nss",l:"NSS mail",t:"sel",o:DN,s:1},
-{k:"psrc",l:"Power source",t:"sel",o:["Grid","Hybrid","Solar"]},
-{k:"sf6",l:"Power SF6",t:"sel",o:["Done","Not matching"],s:1},
+{k:"psrc",l:"Power source",t:"sel",o:["Grid","Hybrid","Solar","No Need"]},
+{k:"sf6",l:"Power SF6",t:"sel",o:["Done","Not matching","No Need"],s:1},
 {k:"sta",l:"STA",t:"sel",o:DN,s:1},
 {k:"snags",l:"Physical snags",t:"sel",o:DN,s:1},
 {k:"i1",l:"1- Outdoor Package / after clearance Package",t:"sel",o:DN,s:1},
@@ -20,10 +20,11 @@ var F=[
 {k:"i7",l:"7- Hybrid system performance / software / self check",t:"sel",o:DN,s:1},
 {k:"c9",l:"9- Comment",t:"area"},{k:"c10",l:"10- Comment",t:"area"},{k:"c11",l:"11- Comment",t:"area"},
 {k:"c12",l:"12- Comment",t:"area"},{k:"c13",l:"13- Comment",t:"area"},{k:"c14",l:"14- Comment",t:"area"},
+{k:"x1",l:"Extra comment 1",t:"area"},{k:"x2",l:"Extra comment 2",t:"area"},{k:"x3",l:"Extra comment 3",t:"area"},{k:"x4",l:"Extra comment 4",t:"area"},{k:"x5",l:"Extra comment 5",t:"area"},
 {k:"i15",l:"15- Notes for needed emails (NFM/Access)",t:"sel",o:["Done","Not Done","No Need"],s:1},
-{k:"vrep",l:"Vodafone rep",t:"sel",o:["Mina Mishriky","Mohamed Adel","Bassem El Shimy","Mostafa Abd Elrazek","Ahmed Hegazy","Ahmed Abdel Samad","Sayed Hussien","Nady Yehia"]},
+{k:"vrep",l:"Vodafone rep",t:"sel",o:["Mina Mishriky","Mohamed Adel","Bassem El Shimy","Mostafa Abd Elrazek","Ahmed Hegazy","Ahmed Abdel Samad","Sayed Hussien","Nady Yehia","No Need"]},
 {k:"crep",l:"Contractor rep",t:"text"},
-{k:"qual",l:"Site Quality",t:"sel",o:["A (standard installation)","B (good quality)","C (Bad Installation)"]}
+{k:"qual",l:"Site Quality",t:"sel",o:["A (standard installation)","B (good quality)","C (Bad Installation)","No Need"]}
 ];
 var CM={i2c:1,i3c:1};
 var $=function(i){return document.getElementById(i)};
