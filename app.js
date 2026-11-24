@@ -34,22 +34,23 @@ function store(k,v){localStorage.setItem(k,JSON.stringify(v))}
 var cur=load(DK,{});
 function toast(m){var t=$("toast");t.textContent=m;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
 function colorize(s){s.className=s.value==="Done"?"done":(s.value==="Not Done"||s.value==="Not matching"?"bad":"")}
+function tgl(s){var b=$("form").querySelector('textarea[data-k="'+s.getAttribute("data-k")+'o"]');if(b)b.style.display=s.value==="Other (write it)"?"":"none"}
 function build(){
  var h="";
  F.forEach(function(f){
   h+='<div class="row"><label>'+f.l+'</label>';
-  if(f.t==="sel"){h+='<select data-k="'+f.k+'"><option value="">Choose...</option>'+f.o.map(function(o){return '<option>'+o+'</option>'}).join("")+'</select>';
-   if(f.c)h+='<div class="note">If not done put a comment:</div><textarea rows="2" data-k="'+f.c+'"></textarea>';}
-  else if(f.t==="area")h+='<textarea rows="2" data-k="'+f.k+'"></textarea>';
+  if(f.t==="sel"){h+='<select data-k="'+f.k+'"><option value="">Choose...</option>'+f.o.map(function(o){return '<option>'+o+'</option>'}).join("")+'<option>Other (write it)</option></select><textarea rows="1" data-k="'+f.k+'o" style="display:none;margin-top:6px" placeholder="Write your answer"></textarea>';
+   if(f.c)h+='<div class="note">If not done put a comment:</div><textarea rows="2" data-k="'+f.c+'"></textarea><div class="dchk"><label><input type="checkbox" data-k="'+f.c+'d"> Done</label></div>';}
+  else if(f.t==="area")h+='<textarea rows="2" data-k="'+f.k+'"></textarea><div class="dchk"><label><input type="checkbox" data-k="'+f.k+'d"> Done</label></div>';
   else h+='<input type="'+(f.t==="date"?"date":"text")+'" data-k="'+f.k+'" autocomplete="off">';
   h+='</div>';
  });
  $("form").innerHTML=h;
  fill();
- $("form").addEventListener("input",function(e){var k=e.target.getAttribute("data-k");if(!k)return;cur[k]=e.target.value;store(DK,cur);if(e.target.tagName==="SELECT")colorize(e.target)});
+ $("form").addEventListener("input",function(e){var k=e.target.getAttribute("data-k");if(!k)return;cur[k]=e.target.type==="checkbox"?(e.target.checked?"yes":""):e.target.value;store(DK,cur);if(e.target.tagName==="SELECT"){colorize(e.target);tgl(e.target)}});
 }
 function fill(){
- [].forEach.call($("form").querySelectorAll("[data-k]"),function(e){e.value=cur[e.getAttribute("data-k")]||"";if(e.tagName==="SELECT")colorize(e)});
+ [].forEach.call($("form").querySelectorAll("[data-k]"),function(e){var k=e.getAttribute("data-k");if(e.type==="checkbox")e.checked=cur[k]==="yes";else e.value=cur[k]||"";if(e.tagName==="SELECT"){colorize(e);tgl(e)}});
 }
 // ---- minimal PDF writer (Helvetica, WinAnsi) ----
 function esc(s){return s.replace(/[\\()]/g,"\\$&")}
@@ -64,10 +65,10 @@ function makePdf(rec,title){
  txt("RO Site Checklist",M,18,1);y-=24;
  txt("Saved: "+title,M,9,0);y-=14;rule();y-=16;
  F.forEach(function(f){
-  var v=rec[f.k]||"-";
+  var v=rec[f.k]||"-";if(rec[f.k]==="Other (write it)"&&rec[f.k+"o"])v=rec[f.k+"o"];
   var ls=wrap(v,46);
   var extra=[];
-  if(f.c&&rec[f.c])extra=wrap("Comment: "+rec[f.c],50);
+  if(f.c&&rec[f.c])extra=wrap("Comment: "+rec[f.c],50);var dk=f.c?f.c+"d":f.k+"d";if(rec[dk])extra=extra.concat(["Done"]);
   var need=14+ls.length*13+extra.length*12+6;
   if(y-need<M+10)np();
   var lab=wrap(f.l,50);
